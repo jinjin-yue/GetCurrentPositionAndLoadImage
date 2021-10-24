@@ -20,10 +20,15 @@
       </l-marker>
     </l-map>
     <div>
-      <p>
-        現在地： {{ currentPosition }} <br />
-        Zoom：{{ currentZoom }}
-      </p>
+      <p>Zoom：{{ currentZoom }}</p>
+      <v-text-field
+        label="現在地"
+        append-outer-icon="mdi-map-marker"
+        v-model="currentPosition"
+        filled
+        readonly
+        @click:append-outer="getPosition"
+      ></v-text-field>
       <v-file-input
         label="写真取込"
         accept="image/*"
@@ -175,10 +180,7 @@ export default {
             position.coords.latitude,
             position.coords.longitude,
           ];
-          this.$refs.map.mapObject.setView(
-            this.currentPosition,
-            this.currentZoom
-          );
+          this.$refs.map.mapObject.setView(this.currentPosition, 18);
         },
         // 取得失敗した場合
         (error) => {
@@ -214,6 +216,9 @@ export default {
 .map {
   height: 60vh;
   z-index: 0;
+}
+.v-text-field {
+  max-width: 480px;
 }
 .v-file-input {
   flex-direction: row-reverse;
