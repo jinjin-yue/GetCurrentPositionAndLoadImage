@@ -1,13 +1,13 @@
 <template>
-  <div style="display:flex">
+  <div>
     <l-map
+      class="map"
       ref="map"
       :min-zoom="minZoom"
       :max-zoom="maxZoom"
       :crs="crs"
       :options="options"
       @update:zoom="updateZoom"
-      style="height: calc(100vh - 80px); width: 70%;"
     >
       <l-tile-layer :url="tileLayer.url" :options="tileLayer.options" />
       <l-marker
@@ -19,7 +19,7 @@
         <l-popup />
       </l-marker>
     </l-map>
-    <div style="margin-left:8px;">
+    <div>
       <p>
         現在地： {{ currentPosition }} <br />
         Zoom：{{ currentZoom }}
@@ -211,8 +211,12 @@ export default {
 </script>
 
 <style scoped>
+.map {
+  height: 60vh;
+  z-index: 0;
+}
 .v-file-input {
   flex-direction: row-reverse;
-  width: 480px;
+  max-width: 480px;
 }
 </style>
